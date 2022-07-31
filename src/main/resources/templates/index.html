@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<section class="banner_main">
+    <div id="banner1" class="carousel slide" data-ride="carousel">
+
+
+        <ol class="carousel-indicators">
+            <li data-target="#banner1" data-slide-to="0" class="active"></li>
+            <li data-target="#banner1" data-slide-to="1"></li>
+            <li data-target="#banner1" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-bg">
+                                    <span>Anime</span>
+                                    <h1>Clothing</h1>
+                                    <p>We have a variety of high quality clothing. Get your own t-shirt of your
+                                        favourite anime.</p>
+                                    <a href="/products/clothing">Buy Now </a> <a href="/contact-us">Contact </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text_img">
+                                    <figure><img src="images/aot-tshirt.jpg" alt="pic"/></figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-bg">
+                                    <span>Anime</span>
+                                    <h1>Funko Pop</h1>
+                                    <p>Get yourself the newest funko pop figures! We have a large variety of anime characters you can choose from!</p>
+                                    <a href="/products/funko">Buy Now </a> <a href="/contact-us">Contact </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text_img">
+                                    <figure><img src="images/funkoo.jpg" alt="pic"/></figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-bg">
+                                    <span>Anime</span>
+                                    <h1>Figures</h1>
+                                    <p>We sell limited edition figures which every big fan must have! Buy quickly because quantities are limited!</p>
+                                    <a href="/products/figure">Buy Now </a> <a href="/contact-us">Contact </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text_img">
+                                    <figure><img src="images/figure.jpeg" alt="pic"/></figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+
+<!-- three_box -->
+<div class="three_box">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="box_text">
+                    <i><img src="images/quality.png" alt="Quality" class="box_text_pic"/></i>
+                    <h3>Quality</h3>
+                    <p>Our store sells only high quality merchandise.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box_text">
+                    <i><img src="images/delivery.png" alt="Delivery" class="box_text_pic"/></i>
+                    <h3>Delivery</h3>
+                    <p>We ship your orders with the most reliable couriers.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box_text">
+                    <i><img src="images/review.png" alt="Review" class="box_text_pic"/></i>
+                    <h3>Review</h3>
+                    <p>99% of our customers would recommend our website.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- products -->
+<div class="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Our Products</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="our_products">
+                    <div class="row">
+
+                        <th:block th:each="e : ${T(bg.softuni.onlineshop.model.enums.CategoryEnum).values()}">
+                            <div class="col-md-4 margin_bottom1">
+                                <div class="product_box">
+                                    <figure><img class="categoryimg" th:src="'images/' + ${#strings.toLowerCase(e)} +  '.png'" alt="Img"/></figure>
+                                    <a th:text="${#strings.capitalize(e)}" th:href="'/products/' + ${#strings.toLowerCase(e)}">Category</a>
+                                </div>
+                            </div>
+
+                        </th:block>
+
+                        <div class="col-md-12">
+                            <a class="read_more" href="/products">View all products</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- laptop  section -->
+<div class="laptop">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="titlepage">
+                    <p>Funko POP</p>
+                    <h2>Unique anime models!</h2>
+                    <a class="read_more" href="/products/funko">Shop Now</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="laptop_box">
+                    <figure><img src="images/funko.jpg" alt="funko"/></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- end laptop  section -->
+
+<!-- customer -->
+<div class="customer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Customer Review</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="myCarousel" class="carousel slide customer_Carousel " data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="container">
+                                <div class="carousel-caption ">
+                                    <div class="row">
+                                        <div class="col-md-9 offset-md-3">
+                                            <div class="test_box">
+                                                <i><img src="images/cos.png" alt="#"/></i>
+                                                <h4>Maria Ivanova</h4>
+                                                <p>I am very pleased with my purchase!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-md-9 offset-md-3">
+                                            <div class="test_box">
+                                                <i><img src="images/cos.png" alt="#"/></i>
+                                                <h4>Ivan Georgiev</h4>
+                                                <p>Best anime shop I have found!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-md-9 offset-md-3">
+                                            <div class="test_box">
+                                                <i><img src="images/cos.png" alt="#"/></i>
+                                                <h4>Martin Genov</h4>
+                                                <p>I love this website <3</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end customer -->
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+</html>
+

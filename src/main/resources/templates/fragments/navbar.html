@@ -1,0 +1,89 @@
+<th:block xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org">
+    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+        <nav class="navigation navbar navbar-expand-md navbar-dark ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+                    aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+
+            <div class="collapse navbar-collapse" id="navbarsExample04">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/search}"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <!--                        <a  class="nav-link dropdown-toggle" href="/users/search" data-toggle="dropdown">-->
+                        <!--                            Search-->
+                        <!--                        </a>-->
+                    <li>
+<!--                        <a><i class="fa fa-search" aria-hidden="true"></i></a>-->
+<!--                                                <a  class="nav-link dropdown-toggle" href="/search">-->
+<!--                                                    Search-->
+<!--                                                </a>-->
+<!--                        <div class="dropdown-menu">-->
+<!--                            <div class="input-group mt-2 mx-2">-->
+<!--                                <div class="form-outline">-->
+
+<!--                                    <form type="search" id="form12" class="form-control-dropdown" th:action="@{/search}" th:method="GET" th:object="${searchDTO}">-->
+<!--                                        <input placeholder="Search" type="search" name="name" th:field="*{name}">-->
+<!--                                    </form>-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact-us">Contact Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a  class="nav-link dropdown-toggle" href="" data-toggle="dropdown">
+                            Products
+                        </a>
+                        <div class="dropdown-menu">
+
+                            <a class="dropdown-item" href="/products">All</a>
+                            <th:block  th:each="s : ${T(bg.softuni.onlineshop.model.enums.CategoryEnum).values()}"
+                                       th:object="${s}">
+                                <a class="dropdown-item" th:href="'/products/' + ${#strings.toLowerCase(s)}" th:text="${#strings.capitalize(#strings.toLowerCase(s))}"></a>
+                            </th:block>
+                            <!--                            <a class="dropdown-item" href="/products/login" sec:authorize="isAnonymous()">Login</a>-->
+                            <!--                            <a class="dropdown-item" href="/products/register" sec:authorize="isAnonymous()">Register</a>-->
+                            <!--                            <a class="dropdown-item" href="/products/logout" sec:authorize="isAuthenticated()">Logout</a>-->
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a  class="nav-link dropdown-toggle" href="" data-toggle="dropdown">
+                            Profile
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/admin" sec:authorize="hasRole('ADMINISTRATOR')">Admin</a>
+                            <a class="dropdown-item" th:href="@{/users/details}" sec:authorize="isAuthenticated()">Details</a>
+                            <a class="dropdown-item" href="/users/login" sec:authorize="isAnonymous()">Login</a>
+                            <a class="dropdown-item" href="/users/register" sec:authorize="isAnonymous()">Register</a>
+                            <form action="/users/logout" method="post" class="dropdown-item" sec:authorize="isAuthenticated()">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <button type="submit">Logout</button>
+                            </form>
+                        </div>
+                    </li>
+                    <!--                    <li class="nav-item">-->
+<!--                        -->
+<!--                    </li>-->
+
+
+                    <li class="nav-item d_none" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</th:block>

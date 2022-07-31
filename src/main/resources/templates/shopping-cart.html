@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="container">
+
+  <h1 class="jumbotron">
+    <span sec:authentication="name"></span>'s Shopping Cart
+  </h1>
+
+  <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
+
+  <div class="panel-default well" th:each="product : ${products.getItems()}">
+    <div class="panel-heading">
+      <h1><a th:text="${product.name}" th:href="@{'/products/' + ${product.id}}">Title</a></h1>
+      <img th:src="${product.imageUrl}" alt="pic" class="img-cart">
+    </div>
+    <div class="row panel-body">
+      <div th:inline="text" class="col-md-2">Price: [[${product.price}]] $</div>
+      <div th:inline="text" class="col-md-9">Quantity: [[${product.qty}]]</div>
+      <a th:href="@{'/shopping-cart/removeProduct/{id}'(id=${product.id})}" class="col-md-1">
+        <button type="button" class="btn btn-primary" th:text="Remove">Remove</button>
+      </a>
+    </div>
+    <br></br>
+  </div>
+
+  <div class="row panel-body">
+    <h2 class="col-md-11" th:inline="text">Total: [[${total}]]</h2>
+    <a th:href="@{'/shopping-cart/checkout'}" class="col-md-1">
+      <button type="button" class="btn btn-danger" th:text="Checkout" th:disabled="${products.getItems().isEmpty()}">Checkout</button>
+    </a>
+  </div>
+
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+
+</body>
+</html>

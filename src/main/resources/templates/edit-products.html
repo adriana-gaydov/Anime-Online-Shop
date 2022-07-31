@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3 id="myModalLabel">Delete</h3>
+    </div>
+    <div class="modal-body">
+        <p></p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button data-dismiss="modal" class="btn red" id="btnYes">Confirm</button>
+    </div>
+</div><table class="table table-striped table-hover table-users">
+    <thead>
+    <tr>
+
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Quantity</th>
+
+    </tr>
+    </thead>
+
+    <tbody id="product-edit-container">
+
+    <tr th:each="p : ${allProducts}" th:object="${p}">
+
+        <td th:text="*{id}">id</td>
+        <td th:text="*{name}">name</td>
+        <td th:text="*{price}">price</td>
+        <td th:text="*{description}">desc</td>
+        <td th:text="*{quantity}">quantity</td>
+
+        <td><a class="btn mini blue-stripe" th:href="@{/admin/edit-product/{id}(id = *{id})}">Edit</a></td>
+
+        <td><a th:href="@{/admin/delete-product/{id}(id = *{id})}" class="confirm-delete btn mini red-stripe" role="button">Delete</a></td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>

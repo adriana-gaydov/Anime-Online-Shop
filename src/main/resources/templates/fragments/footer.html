@@ -1,0 +1,49 @@
+<th:block xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org">
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+          <img class="logo1" src="../../images/rcoon.png" alt="#" width="250" height="62"/>
+          <ul class="social_icon">
+            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+          <h3>About Us</h3>
+          <ul class="about_us">
+            <li>We are a brand new<br> e-shop in Bulgaria! <br>Our goal is to  provide <br> our customers with the best!
+            </li>
+          </ul>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+          <h3>Contact Us</h3>
+          <ul class="about_us">
+            <li> +3598888888 <br> +35904234234 <br> Message us on Facebook! </li>
+          </ul>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+          <form class="bottom_form"  th:object="${newsletterDTO}"
+                th:action="@{/newsletter/add}"
+                th:method="post">
+            <h3>Newsletter</h3>
+            <input class="enter" placeholder="Enter your email" type="text" name="email">
+            <button class="sub_btn" type="submit">subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p>© 2022 Rcoon </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>

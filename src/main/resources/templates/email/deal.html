@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:include="~{fragments/head}">
+</head>
+
+<body class="main-layout inner_posituong">
+
+<div class="container bg-white">
+    <div class="titlepage">
+        <h2 th:text="${title}">All products</h2>
+    </div>
+    <div class="row">
+        <th:block th:each="p : ${deals}" th:object="${p}">
+            <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+                <div class="product">
+                    <img th:src="*{imageUrl}" alt="Product Img">
+                </div>
+
+                <div class="title pt-4 pb-1"><a th:text="*{name}" >Product name</a></div>
+                <div class="price" th:text="*{price}">Product price</div>
+                <a th:href="@{mysite.com/products/{id}(id = *{id})}">Link to buy</a>
+
+            </div>
+        </th:block>
+    </div>
+</div>
+
+</body>
+
+</html>

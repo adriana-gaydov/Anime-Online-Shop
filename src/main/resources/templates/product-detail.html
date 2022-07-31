@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="laptop">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="titlepage" th:object="${product}">
+                    <h2 th:text="*{name}">Name</h2>
+                    <br>
+                    <p th:text="*{description}">Desc</p>
+                    <p th:text="|*{price} USD|">Price</p>
+                    <p th:if="*{quantity > 0}" th:text="|*{quantity} in stock|"></p>
+                    <p th:unless="*{quantity > 0}" class="text-danger">Out of stock</p>
+                    <a th:href="@{'/shopping-cart/addProduct/{id}'(id=*{id})}"
+                       sec:authorize="isAuthenticated()" th:if="${product.quantity}>0">
+                    <span><button type="button" class="read_more" style="background-color: #7BC475; color: #FFFFFF;">
+                        Add to cart</button></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="laptop_box">
+                    <figure><img th:src="${product.imageUrl}" alt="pic"/></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+
+<div class="about" style="padding-top: 7%">
+    <div class="container">
+        <div class="row d_flex">
+            <div class="col-md-5">
+                <div class="titlepage">
+                    <h2>About Us</h2>
+                    <p class="text_about">Welcome to our shop! We are selling high-quality anime merch for the biggest fans.<span class="dots"> ...</span>
+                        <span class="more_text">Founded in 2022, our goal is to provide our customers with the best. Our partners and employees are top level. #anime4life</span>
+                    </p>
+                    <a class="read-more-btn">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="about_img">
+                    <figure><img src="images/about.jpg" alt="#"/></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>

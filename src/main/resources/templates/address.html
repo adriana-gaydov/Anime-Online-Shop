@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="container">
+
+    <!--    <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>-->
+
+    <label for="hide">New address/Existing address</label>
+    <input id="hide" type="checkbox" name="checkk" value="checkk" checked/>
+
+    <div class="contact" style="padding-top: 7%;" id="address-field">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Enter new address</h2>
+                        <form class="main_form"
+                              th:action="@{/shopping-cart/address/new}"
+                              th:object="${addressModel}"
+                              th:method="post">
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <select th:field="*{country}" th:errorclass="bg-danger"
+                                            class="browser-default custom-select" id="style" name="country">
+
+                                        <option value="">Select country</option>
+                                        <option th:each="s : ${T(bg.softuni.onlineshop.model.enums.CountryEnum).values()}"
+                                                th:value="${s}"
+                                                th:text="${s}"
+                                                th:selected="${s} == *{country}">Country
+                                        </option>
+
+                                    </select>
+                                    <small th:if="${#fields.hasErrors('country')}" th:errors="*{country}"
+                                           class="text-danger">country error message</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input th:field="*{city}" th:errorclass="bg-danger"
+                                           class="auth" placeholder="City" type="text" name="city">
+                                    <small th:if="${#fields.hasErrors('city')}" th:errors="*{city}"
+                                           class="text-danger">city error message</small>
+                                </div>
+
+                                <div class="col-md-12 ">
+                                    <input th:field="*{zipCode}" th:errorclass="bg-danger"
+                                           class="auth" placeholder="Zip code" type="text" name="zipCode">
+                                    <small th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"
+                                           class="text-danger">zipCode error message</small>
+                                </div>
+
+                                <div class="col-md-12 ">
+                                    <input th:field="*{street}" th:errorclass="bg-danger"
+                                           class="auth" placeholder="Full street" type="text" name="street">
+                                    <small th:if="${#fields.hasErrors('street')}" th:errors="*{street}"
+                                           class="text-danger">street error message</small>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="send_btn">Finish order</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="contact address-field-hide" style="padding-top: 7%;" id="address-field-user">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Enter address</h2>
+                        <form class="main_form"
+                              th:action="@{/shopping-cart/address/exist}"
+                              th:object="${addressModel}"
+                              th:method="post">
+
+                            <!--                    <div>-->
+                            <!--                        <c:if test="${error == true}">-->
+                            <!--                            <h1>DUPA</h1>-->
+                            <!--                        </c:if>-->
+                            <!--                    </div>-->
+
+                            <!--            <div th:if="${param.error}" class="alert alert-danger">-->
+                            <!--                Invalid username and password.-->
+                            <!--            </div>-->
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <select  th:errorclass="bg-danger"
+                                            class="browser-default custom-select" name="address">
+
+                                        <option value="">Select address</option>
+                                        <option th:each="a : ${curUser.getAddresses()}"
+                                                th:value="${a.id}"
+                                                th:text="${a.toString()}">
+<!--                                                th:selected="${s} == *{country}">Country-->
+                                        </option>
+
+                                    </select>
+                                    <small th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+                                           class="text-danger">address error message</small>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="send_btn">Finish order</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+<script src="../../js/address.js"></script>
+
+</body>
+</html>

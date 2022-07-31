@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<section>
+
+    <div class="titlepage" style="margin-top: 3%">
+        <h2>ADMIN PAGE</h2>
+    </div>
+
+    <div class="d-flex justify-content-center" style="margin-bottom: 3%">
+        <div class="btn">
+            <a th:href="@{/admin/add-product}" class="read-more-btn">ADD PRODUCT</a>
+        </div>
+        <div class="btn">
+            <a th:href="@{/admin/edit-products}" class="read-more-btn">EDIT PRODUCTS</a>
+        </div>
+        <div class="btn">
+            <a th:href="@{/admin/all-users}" class="read-more-btn">ALL USERS</a>
+        </div>
+    </div>
+</section>
+
+<div class="titlepage">
+    <h2>ALL ORDERS</h2>
+</div>
+
+<article>
+    <table id="orders-table" class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Products</th>
+            <th scope="col">Total price</th>
+            <th scope="col">Date</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+        </tr>
+        </thead>
+        <tbody id="orders-container">
+        <!--            filled with js-->
+        </tbody>
+        <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </tfoot>
+    </table>
+</article>
+
+<div class="titlepage">
+    <h2>STATISTIC FOR THE VISITATIONS</h2>
+</div>
+
+<article class="statistic-content">
+    <table id="my-table2" class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">IP Address</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody id="statistic-tBody">
+        </tbody>
+        <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </tfoot>
+    </table>
+</article>
+
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+<script src="../../js/orders.js"></script>
+<script src="../../js/statistic.js"></script>
+</body>
+
+</html>

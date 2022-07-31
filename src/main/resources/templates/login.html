@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:c="http://www.w3.org/1999/XSL/Transform">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="contact" style="padding-top: 7%">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Login</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+
+                <form class="main_form"
+                      th:action="@{/users/login}"
+                      th:method="post">
+
+                    <div th:if="${badCredentials}" class="alert alert-danger">
+                        Invalid username or password.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <input class="auth" placeholder="Email" type="email" name="email" th:value="${email}">
+                        </div>
+                        <div class="col-md-12 ">
+                            <input class="auth" placeholder="Password" type="password" name="password">
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="send_btn">Login</button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+</html>

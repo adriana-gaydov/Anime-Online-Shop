@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="contact" style="padding-top: 7%">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Add product</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <form class="main_form" enctype="multipart/form-data"
+                      th:object="${productModel}"
+                      th:action="@{/admin/add-product}"
+                      th:method="post">
+
+                    <div th:if="${productExists}" class="alert alert-danger">
+                       Product already exists.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <input th:field="*{name}" th:errorclass="bg-danger"
+                                   class="contactus" placeholder="Name" type="text" name="name">
+                            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                   class="text-danger">Name error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <input  th:field="*{price}" th:errorclass="bg-danger"
+                                    class="contactus" placeholder="Price" type="number" name="price">
+                            <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                                   class="text-danger">price error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea th:field="*{description}" th:errorclass="bg-danger"
+                                      class="textarea contactus" placeholder="Description" type="text" Message="Description" name="description">Description </textarea>
+                            <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                                   class="text-danger">description error message</small>
+                        </div>
+                        <div class="col-md-12" style="margin-top: 3%">
+                            <span class="text-white">Image</span>
+                            <select th:field="*{category}" th:errorclass="bg-danger"
+                                    class="browser-default custom-select" id="style" name="category">
+
+                                <option value="">Select category</option>
+                                <option th:each="s : ${T(bg.softuni.onlineshop.model.enums.CategoryEnum).values()}"
+                                        th:value="${s}"
+                                        th:text="${s}"
+                                        th:selected="${s} == *{category}">Country
+                                </option>
+
+                            </select>
+                            <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+                                   class="text-danger">category error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <input th:field="*{quantity}" th:errorclass="bg-danger"
+                                   class="contactus" placeholder="Quantity" type="number" name="quantity">
+                            <small th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"
+                                   class="text-danger">quantity error message</small>
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 3%">
+                            <span class="text-white">Image</span>
+                            <input th:field="*{file}" type="file" name="file" class="form-control-file" id="img">
+                            <small th:if="${#fields.hasErrors('file')}" th:errors="*{file}"
+                                   class="text-danger">file error message</small>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button class="send_btn" type="submit">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="contact" style="padding-top: 7%">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Contact Now</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <form id="request" class="main_form"
+                        th:object="${contactDTO}"
+                        th:action="@{/contact-us}"
+                        th:method="post">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <input th:field="*{name}" th:errorclass="bg-danger"
+                                   class="contactus" placeholder="Name" type="text" name="name">
+                            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                   class="text-danger">Name error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <input  th:field="*{email}" th:errorclass="bg-danger"
+                                    class="contactus" placeholder="Email" type="email" name="email">
+                            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                   class="text-danger">Email error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <input th:field="*{phoneNumber}" th:errorclass="bg-danger"
+                                   class="contactus" placeholder="Phone Number" type="text" name="phoneNumber">
+                            <small th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
+                                   class="text-danger">Phone number error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea th:field="*{message}" th:errorclass="bg-danger"
+                                    class="textarea contactus" placeholder="Message" type="text" Message="Name">Message </textarea>
+                            <small th:if="${#fields.hasErrors('message')}" th:errors="*{message}"
+                                   class="text-danger">Message error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="send_btn" type="submit">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="contact" style="padding-top: 7%">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="titlepage">
+          <h2>Edit user</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <form class="main_form" enctype="multipart/form-data"
+              th:object="${user}"
+              th:action="@{/users/edit}"
+              th:method="post">
+
+
+          <div class="row">
+            <div class="col-md-12 ">
+              <input th:field="*{firstName}" th:errorclass="bg-danger"
+                     class="contactus" type="text" name="firstName">
+              <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                     class="text-danger">Name error message</small>
+            </div>
+
+            <div class="col-md-12 ">
+              <input th:field="*{middleName}" th:errorclass="bg-danger" placeholder="Middle name"
+                     class="contactus" type="text" name="middleName">
+              <small th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"
+                     class="text-danger">Name error message</small>
+            </div>
+
+            <div class="col-md-12 ">
+              <input th:field="*{lastName}" th:errorclass="bg-danger"
+                     class="contactus" type="text" name="lastName">
+              <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                     class="text-danger">Name error message</small>
+            </div>
+
+            <div class="col-md-12 ">
+              <input th:field="*{email}" th:errorclass="bg-danger"
+                     class="contactus" type="email" name="email">
+              <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                     class="text-danger">email error message</small>
+              <div th:if="${notUniqueEmail}" class="alert alert-danger">
+                Email already exists!
+              </div>
+            </div>
+
+
+
+            <div class="col-md-12">
+              <button class="send_btn" type="submit">Send</button>
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>

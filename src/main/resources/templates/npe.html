@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="laptop">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="titlepage">
+          <p>OOPS! Error found! Npe thrown!</p>
+          <a class="read_more" href="/static">Home</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="laptop_box">
+          <figure><img src="../../images/oops.gif" alt="OOPS"/></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>

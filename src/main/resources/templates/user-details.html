@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<main class="p-5 align-content-center bg-blur my-register-div">
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-7">
+                <div class="profile-card p-3 py-4">
+<!--                    <div class="text-center"><img src="/images/profile.jpg" width="100" class="rounded-circle"></div>-->
+                    <div class="text-center mt-3" th:object="${user}">
+                        <h1 class="mt-4 mb-0" id="fullName">Full name</h1>
+                        <h2 th:text="${user.getFullName()}">Full name</h2>
+                        <h1 class="mt-4 mb-0" id="email">Email</h1>
+                        <h2 th:text="${user.email}">email</h2>
+                        <h1 class="mt-4 mb-0" id="orders" style="padding-bottom: 4%"><a th:href="@{/users/details/orders}">My orders</a></h1>
+
+                        <div class="buttons">
+                            <button class="read-more-btn"><a href="/users/edit">Edit</a></button>
+                            <button class="read-more-btn"><a href="/">Home</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>

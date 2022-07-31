@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="contact" style="padding-top: 7%">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Register</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+
+                <form class="main_form"
+                      th:action="@{/users/register}"
+                      th:object="${userRegisterModel}"
+                      th:method="post">
+
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <input th:field="*{firstName}" th:errorclass="bg-danger"
+                                   class="auth" placeholder="First name*" type="text" name="firstName">
+                            <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                   class="text-danger">First name error message</small>
+                        </div>
+                        <div class="col-md-12 ">
+                            <input th:field="*{middleName}"
+                                   class="auth" placeholder="Middle name" type="text" name="middleName">
+                        </div>
+                        <div class="col-md-12 ">
+                            <input th:field="*{lastName}" th:errorclass="bg-danger"
+                                   class="auth" placeholder="Last name*" type="text" name="lastName">
+                            <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                   class="text-danger">Last name error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <input th:field="*{email}" th:errorclass="bg-danger"
+                                   class="auth" placeholder="Email*" type="email" name="email">
+                            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                   class="text-danger">Email error message</small>
+                        </div>
+
+                        <div class="col-md-12 ">
+                            <input th:field="*{password}" th:errorclass="bg-danger"
+                                   class="auth" placeholder="Password*" type="password" name="password">
+                            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                   class="text-danger">Password error message</small>
+                        </div>
+                        <div class="col-md-12 ">
+                            <input th:field="*{confirmPassword}" th:errorclass="bg-danger"
+                                   class="auth" placeholder="Confirm password*" type="password"
+                                   name="confirmPassword">
+                            <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+                                   class="text-danger">Confirm password error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <input th:field="*{phoneNumber}" th:errorclass="bg-danger"
+                                   class="auth" placeholder="Phone Number*" type="text" name="Phone Number">
+                            <small th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
+                                   class="text-danger">Phone number error message</small>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="send_btn">Register</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="pwstrength.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        options = {
+            common: {minChar: 8},
+            ui: {
+                showVerdictsInsideProgressBar: true,
+                showErrors: true,
+                errorMessages: {
+                    wordLength: '<spring:message code="error.wordLength"/>',
+                    wordNotEmail: '<spring:message code="error.wordNotEmail"/>',
+                    wordSequences: '<spring:message code="error.wordSequences"/>',
+                    wordLowercase: '<spring:message code="error.wordLowercase"/>',
+                    wordUppercase: '<spring:message code="error.wordUppercase"/>',
+                    wordOneNumber: '<spring:message code="error.wordOneNumber"/>',
+                    wordOneSpecialChar: '<spring:message code="error.wordOneSpecialChar"/>'
+                }
+            }
+        };
+        $('#password').pwstrength(options);
+    });
+</script>
+
+</body>
+</html>

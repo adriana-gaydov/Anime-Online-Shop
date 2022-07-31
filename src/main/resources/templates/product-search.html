@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:include="~{fragments/head}"></head>
+
+<body class="main-layout inner_posituong">
+
+<th:block th:include="~{fragments/loader}"></th:block>
+
+<header th:include="~{fragments/header}"></header>
+
+<div class="container">
+    <h2 class="text-center text-white">Search for offers</h2>
+    <form
+            th:method="GET"
+            th:action="@{/search}"
+            th:object="${searchDTO}"
+            class="form-inline"
+            style="justify-content: center; margin-top: 50px;"
+    >
+        <div style="position: relative">
+            <input
+                    th:field="*{name}"
+                    th:errorclass="is-invalid"
+                    class="form-control mr-sm-2"
+                    style="width: 280px;"
+                    type="search"
+                    placeholder="Product name..."
+                    aria-label="Search"
+                    id="model"
+            />
+            <input
+                    th:field="*{minPrice}"
+                    th:errorclass="is-invalid"
+                    class="form-control mr-sm-2"
+                    style="width: 280px;"
+                    type="search"
+                    placeholder="Min price..."
+                    aria-label="Search"
+                    id="minPrice"
+            />
+            <input
+                    th:field="*{maxPrice}"
+                    th:errorclass="is-invalid"
+                    class="form-control mr-sm-2"
+                    style="width: 280px;"
+                    type="search"
+                    placeholder="Max price..."
+                    aria-label="Search"
+                    id="maxPrice"
+            />
+            <small
+                    id="searchOfferHelpInline"
+                    class="bg-danger text-light rounded invalid-feedback"
+                    style="width: 97%; position: absolute; padding: 3px 15px; text-align: center;"
+            >
+                Try writing something this time.
+            </small>
+        </div>
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+
+<!--<div class="offers row mx-auto d-flex flex-row justify-content-center" style="margin-top: 40px;">-->
+
+<!--    <div th:each="p: ${products}" class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">-->
+<!--        <div class="card-img-top-wrapper">-->
+<!--            <img class="card-img-top" th:src="${p.imageUrl}" alt="Car image">-->
+<!--        </div>-->
+<!--        <div class="card-body pb-1">-->
+<!--            <h5 class="card-title" th:text="${p.name}"></h5>-->
+<!--        </div>-->
+<!--        <ul class="offer-details list-group list-group-flush">-->
+<!--            <li class="list-group-item">-->
+<!--                <div class="card-text"><span th:text="'Mileage: ' + ${offer.mileage} + ' km'"></span></div>-->
+<!--                <div class="card-text"><span th:text="'Price: ' + ${offer.price} + ' lv'"></span></div>-->
+<!--                <div class="card-text"><span th:text="'Engine: ' + ${offer.engine}"></span></div>-->
+<!--                <div class="card-text"><span th:text="'Transmission: ' + ${offer.transmission}"></span></div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <div class="card-body">-->
+<!--            <a class="card-link" href="/">Details</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <h3 th:if="${offers != null && offers.size == 0}" class="text-info">There are no offers with this model yet</h3>-->
+<!--</div>-->
+
+<div class="titlepage">
+    <h2 th:if="${products != null && products.size > 0}">Found products</h2>
+    <h2 th:if="${products != null && products.size == 0}">No products found</h2>
+</div>
+
+
+<div class="container bg-white">
+    <div class="row">
+        <th:block th:each="p : ${products}" th:object="${p}">
+            <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+                <div class="product">
+                    <img th:src="*{imageUrl}" alt="Product Img">
+                </div>
+
+                <div class="title pt-4 pb-1"><a th:text="*{name}" th:href="@{/products/{id}(id = *{id})}">Product name</a></div>
+                <div class="price" th:text="*{price}">Product price</div>
+                <a th:href="@{'/shopping-cart/addProduct/{id}'(id=*{id})}"
+                   sec:authorize="isAuthenticated()" th:if="${p.quantity}>0">
+                    <span><button type="button" class="add-cart" style="background-color: #7BC475; color: #FFFFFF;">
+                        Add to cart</button></span>
+                </a>
+                <th:block th:if="${p.quantity}<=0">
+                    <span class="text-danger">Out of stock</span>
+                </th:block>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+<footer th:include="~{fragments/footer}"></footer>
+
+<th:block th:include="~{fragments/scripts}"></th:block>
+
+</body>
+
+</html>
