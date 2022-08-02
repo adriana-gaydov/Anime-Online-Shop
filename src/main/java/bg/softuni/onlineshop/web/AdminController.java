@@ -89,7 +89,6 @@ public class AdminController {
         return "edit-products";
     }
 
-    //todo
     @GetMapping("/edit-product/{id}")
     public String editProducts(@PathVariable("id") Long id,
                                Model model) {

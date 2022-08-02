@@ -49,7 +49,6 @@ public class OrderServiceImpl implements OrderService {
     private OrderEntity createOrder(CustomUserDetails user, AddressEntity address) {
         this.addressService.save(address);
 
-        //todo
         UserEntity currentUser = this.userService.entityFindById(user.getId());
 
         OrderEntity order = new OrderEntity()
@@ -59,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
         this.userService.save(currentUser);
 
         order.setDateCreated(LocalDate.now());
-//
+
         List<CartItemEntity> cartItems = this.shoppingCartService.getShoppingCart().getItems()
                 .stream().map(e -> {
                             ProductEntity product = this.productService.findById(e.getId()).get();
