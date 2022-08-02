@@ -121,6 +121,12 @@ public class OrderServiceImpl implements OrderService {
         this.orderRepository.deleteAll();
     }
 
+    @Override
+    public boolean isExist(Long id) {
+
+        return this.orderRepository.findById(id).isPresent();
+    }
+
     private BigDecimal getTotalPrice(OrderEntity e) {
         return totalPrice(e.getItems().stream().map(CartItemEntity::getProduct).map(ProductEntity::getPrice).toList());
     }

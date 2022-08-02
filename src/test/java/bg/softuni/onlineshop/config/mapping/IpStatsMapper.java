@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface StatisticMapper {
+public interface IpStatsMapper {
 
     StatisticMapper INSTANCE = Mappers.getMapper(StatisticMapper.class);
 

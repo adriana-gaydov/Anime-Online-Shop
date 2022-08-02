@@ -4,7 +4,7 @@ import bg.softuni.onlineshop.exceptionhandling.exception.ProductNotFoundExceptio
 import bg.softuni.onlineshop.model.enums.CategoryEnum;
 import bg.softuni.onlineshop.model.view.ProductViewModel;
 import bg.softuni.onlineshop.service.ProductService;
-import bg.softuni.onlineshop.service.StatisticService;
+import bg.softuni.onlineshop.service.IpStatsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,18 +19,18 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    private final StatisticService statisticService;
+    private final IpStatsService ipStatsService;
 
-    public ProductController(ProductService productService, StatisticService statisticService) {
+    public ProductController(ProductService productService, IpStatsService ipStatsService) {
         this.productService = productService;
-        this.statisticService = statisticService;
+        this.ipStatsService = ipStatsService;
     }
 
     @GetMapping("")
     public String product(Model model, HttpServletResponse response) {
 
         List<ProductViewModel> products = this.productService.getAllProducts();
-        this.statisticService.saveVisitationInDataBase(response.getHeader("visitor"));
+        this.ipStatsService.saveVisitationInDataBase(response.getHeader("visitor"));
 
         model.addAttribute("products", products);
         model.addAttribute("title", "all products");
@@ -42,7 +42,7 @@ public class ProductController {
     public String productsClothing(Model model, HttpServletResponse response) {
 
         List<ProductViewModel> clothing = this.productService.findByCategory(CategoryEnum.CLOTHING);
-        this.statisticService.saveVisitationInDataBase(response.getHeader("visitor"));
+        this.ipStatsService.saveVisitationInDataBase(response.getHeader("visitor"));
 
         model.addAttribute("products", clothing);
         model.addAttribute("title", "clothing");
@@ -54,7 +54,7 @@ public class ProductController {
     public String productsManga(Model model, HttpServletResponse response) {
 
         List<ProductViewModel> manga = this.productService.findByCategory(CategoryEnum.MANGA);
-        this.statisticService.saveVisitationInDataBase(response.getHeader("visitor"));
+        this.ipStatsService.saveVisitationInDataBase(response.getHeader("visitor"));
 
         model.addAttribute("products", manga);
         model.addAttribute("title", "manga");
@@ -66,7 +66,7 @@ public class ProductController {
     public String productsFunko(Model model, HttpServletResponse response) {
 
         List<ProductViewModel> funko = this.productService.findByCategory(CategoryEnum.FUNKO);
-        this.statisticService.saveVisitationInDataBase(response.getHeader("visitor"));
+        this.ipStatsService.saveVisitationInDataBase(response.getHeader("visitor"));
 
         model.addAttribute("products", funko);
         model.addAttribute("title", "funko");
@@ -78,7 +78,7 @@ public class ProductController {
     public String productsFigure(Model model, HttpServletResponse response) {
 
         List<ProductViewModel> figure = this.productService.findByCategory(CategoryEnum.FIGURE);
-        this.statisticService.saveVisitationInDataBase(response.getHeader("visitor"));
+        this.ipStatsService.saveVisitationInDataBase(response.getHeader("visitor"));
 
         model.addAttribute("products", figure);
         model.addAttribute("title", "figure");
@@ -90,7 +90,7 @@ public class ProductController {
     public String productsPoster(Model model, HttpServletResponse response) {
 
         List<ProductViewModel> poster = this.productService.findByCategory(CategoryEnum.POSTER);
-        this.statisticService.saveVisitationInDataBase(response.getHeader("visitor"));
+        this.ipStatsService.saveVisitationInDataBase(response.getHeader("visitor"));
 
         model.addAttribute("products", poster);
         model.addAttribute("title", "poster");
@@ -102,7 +102,7 @@ public class ProductController {
     public String productsPlush(Model model, HttpServletResponse response) {
 
         List<ProductViewModel> plush = this.productService.findByCategory(CategoryEnum.PLUSH);
-        this.statisticService.saveVisitationInDataBase(response.getHeader("visitor"));
+        this.ipStatsService.saveVisitationInDataBase(response.getHeader("visitor"));
 
         model.addAttribute("products", plush);
         model.addAttribute("title", "plush");

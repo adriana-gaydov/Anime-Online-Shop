@@ -2,12 +2,12 @@ package bg.softuni.onlineshop.model.view;
 
 import java.time.LocalDateTime;
 
-public class StatisticViewModel {
+public class IpStatsViewModel {
     private LocalDateTime localDateTime;
     private String ipAddress;
     private Long id;
 
-    public StatisticViewModel() {
+    public IpStatsViewModel() {
     }
 
     public Long getId() {

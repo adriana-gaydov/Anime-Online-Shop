@@ -181,6 +181,22 @@ public class AdminController {
         return "redirect:/admin/all-users";
     }
 
+    @GetMapping("/users/make-admin/{id}")
+    public String makeUserAdminById(@PathVariable("id") Long id) {
+
+        this.userService.makeAdminById(id);
+
+        return "redirect:/admin/all-users";
+    }
+
+    @GetMapping("/users/remove-admin/{id}")
+    public String removeUserAdminById(@PathVariable("id") Long id) {
+
+        this.userService.removeAdminById(id);
+
+        return "redirect:/admin/all-users";
+    }
+
     @ModelAttribute("productModel")
     public ProductAddDTO productModel() {
         return new ProductAddDTO();

@@ -37,7 +37,7 @@ public class EmailServiceImpl {
             mimeMessageHelper.setFrom("rcoon_service@rcoon.com");
             mimeMessageHelper.setTo(userEmail);
             mimeMessageHelper.setSubject("Welcome to Rcoon!");
-            mimeMessageHelper.setText(generateMessageContentRegistration(userName), generateMessageContentRegistration(userName));
+            mimeMessageHelper.setText(generateMessageContentRegistration(userName), true);
 
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {
@@ -63,7 +63,7 @@ public class EmailServiceImpl {
             mimeMessageHelper.setSubject("Newest deals from Rcoon!");
 
             List<ProductViewModel> deals = this.productService.getNewestDeals();
-            mimeMessageHelper.setText(generateMessageContentDeal(deals), generateMessageContentDeal(deals));
+            mimeMessageHelper.setText(generateMessageContentDeal(deals), true);
 
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {

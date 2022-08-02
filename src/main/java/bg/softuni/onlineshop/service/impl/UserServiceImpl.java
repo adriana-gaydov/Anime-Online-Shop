@@ -2,6 +2,7 @@ package bg.softuni.onlineshop.service.impl;
 
 import bg.softuni.onlineshop.config.mapping.UserMapper;
 import bg.softuni.onlineshop.exceptionhandling.exception.UserNotFoundException;
+import bg.softuni.onlineshop.model.dto.RoleDTO;
 import bg.softuni.onlineshop.model.dto.UserEditDTO;
 import bg.softuni.onlineshop.model.dto.UserRegisterDTO;
 import bg.softuni.onlineshop.model.entity.CartItemEntity;
@@ -15,6 +16,7 @@ import bg.softuni.onlineshop.model.view.UserViewModel;
 import bg.softuni.onlineshop.repository.UserRepository;
 import bg.softuni.onlineshop.service.RoleService;
 import bg.softuni.onlineshop.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -172,6 +174,39 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(user);
     }
 
+    @Override
+    public void deleteByEmail(String email) {
+
+        Optional<UserEntity> user = this.userRepository.findByEmail(email);
+        this.userRepository.deleteById(user.get().getId());
+    }
+
+    @Override
+    public void makeAdminById(Long id) {
+        Optional<UserEntity> optUser = this.userRepository.findById(id);
+
+        if (optUser.isEmpty()) {
+            throw new UserNotFoundException(id);
+        }
+
+        UserEntity user = optUser.get();
+        user.addRole(this.roleService.findByRole(RoleEnum.ADMINISTRATOR));
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public void removeAdminById(Long id) {
+        Optional<UserEntity> optUser = this.userRepository.findById(id);
+
+        if (optUser.isEmpty()) {
+            throw new UserNotFoundException(id);
+        }
+
+        UserEntity user = optUser.get();
+        user.removeRole(this.roleService.findByRole(RoleEnum.ADMINISTRATOR));
+        this.userRepository.save(user);
+    }
+
     private UserViewModel getUserViewModel(UserEntity e) {
         return new UserViewModel()
                 .setId(e.getId())
@@ -181,11 +216,20 @@ public class UserServiceImpl implements UserService {
                 .setEmail(e.getEmail())
                 .setActive(e.isActive())
                 .setOrders(e.getOrders().stream()
-                        .map(this::getOrderViewModel).toList());
+                        .map(this::getOrderViewModel).toList())
+                .setRoles(getRoleDTOList(e));
+    }
+
+    private List<RoleDTO> getRoleDTOList(UserEntity e) {
+        return e.getRoles()
+                .stream()
+                .map(r -> r.getRole().name()).map(e2 -> new RoleDTO().setName(e2))
+                .toList();
     }
 
     private OrderViewModel getOrderViewModel(OrderEntity o) {
-        return new OrderViewModel().setOrderId(o.getId())
+        return new OrderViewModel()
+                .setOrderId(o.getId())
                 .setFullAddress(o.getAddress().toString())
                 .setOrderDate(o.getDateCreated())
                 .setTotalPrice(o.getTotalPrice())
@@ -194,6 +238,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private ProductIdNameView getProductIdNameView(CartItemEntity i) {
-        return new ProductIdNameView().setId(i.getId()).setProdName(i.getProduct().getName());
+        return new ProductIdNameView()
+                .setId(i.getProduct().getId())
+                .setProdName(i.getProduct().getName());
     }
 }

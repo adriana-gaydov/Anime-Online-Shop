@@ -17,4 +17,6 @@ public interface OrderService {
     List<OrderAdminView> getAllOrders();
 
     void dropTable();
+
+    boolean isExist(Long id);
 }

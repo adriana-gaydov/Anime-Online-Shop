@@ -151,4 +151,8 @@ public class UserEntity extends BaseEntity {
         this.orders = orders;
         return this;
     }
+
+    public void removeRole(RoleEntity role) {
+        this.roles.remove(role);
+    }
 }

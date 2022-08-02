@@ -33,4 +33,10 @@ public interface UserService {
     void enableById(Long id);
 
     void updateUser(UserEditDTO userEditDTO, UserEntity user);
+
+    void deleteByEmail(String s);
+
+    void makeAdminById(Long id);
+
+    void removeAdminById(Long id);
 }

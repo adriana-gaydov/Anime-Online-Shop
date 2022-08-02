@@ -18,6 +18,7 @@ fetch("http://localhost:8080/api/users", requestOptions)
         let lastName = document.createElement('td')
         let email = document.createElement('td')
         let action = document.createElement('td')
+        let actionAdmin = document.createElement('td')
 
         id.textContent = user.id
         firstName.textContent = user.firstName
@@ -35,7 +36,26 @@ fetch("http://localhost:8080/api/users", requestOptions)
             actionHref.textContent = 'Enable'
         }
 
+        let actionAdminHref = document.createElement('a')
+
+        let isAdmin = false
+
+        user.roles.forEach(e => {
+                if (e.name == 'ADMINISTRATOR') {
+                    isAdmin = true;
+                }
+            }
+        )
+        if (isAdmin) {
+            actionAdminHref.href = '/admin/users/remove-admin/' + user.id
+            actionAdminHref.textContent = 'Remove admin'
+        } else {
+            actionAdminHref.href = '/admin/users/make-admin/' + user.id
+            actionAdminHref.textContent = 'Make admin'
+        }
+
         action.appendChild(actionHref)
+        actionAdmin.appendChild(actionAdminHref)
 
         row.appendChild(id)
         row.appendChild(firstName)
@@ -43,6 +63,7 @@ fetch("http://localhost:8080/api/users", requestOptions)
         row.appendChild(lastName)
         row.appendChild(email)
         row.appendChild(action)
+        row.appendChild(actionAdmin)
 
         usersContainer.appendChild(row)
 

@@ -34,7 +34,6 @@ public class UserController {
 
     @GetMapping("/about")
     public String about() {
-
         return "about";
     }
 

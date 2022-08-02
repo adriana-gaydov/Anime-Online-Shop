@@ -6,13 +6,13 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "statistics")
-public class StatisticEntity extends BaseEntity {
+@Table(name = "ip_stats")
+public class IpStatsEntity extends BaseEntity {
 
     private LocalDateTime localDateTime;
     private String ipAddress;
 
-    public StatisticEntity() {
+    public IpStatsEntity() {
     }
 
     @Column(nullable = false, name = "local_date_time")

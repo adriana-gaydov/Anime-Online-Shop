@@ -41,7 +41,6 @@ public class ContactController {
             return "redirect:contact-us";
         }
 
-        //todo:javamail
         this.emailService.sendContactMail(contactDTO.getEmail(), contactDTO.getName(),
                 contactDTO.getPhoneNumber(), contactDTO.getMessage());
         return "redirect:/";

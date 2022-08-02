@@ -1,6 +1,10 @@
 package bg.softuni.onlineshop.model.view;
 
+import bg.softuni.onlineshop.model.dto.RoleDTO;
+import bg.softuni.onlineshop.model.entity.RoleEntity;
+
 import java.util.List;
+import java.util.Set;
 
 public class UserViewModel {
 
@@ -14,6 +18,8 @@ public class UserViewModel {
     private boolean isActive;
 
     private List<OrderViewModel> orders;
+
+    private List<RoleDTO> roles;
 
     public String getFirstName() {
         return firstName;
@@ -80,5 +86,14 @@ public class UserViewModel {
 
     public String getFullName() {
         return firstName + (middleName == null ? "" : " "+middleName) + " " + lastName;
+    }
+
+    public List<RoleDTO> getRoles() {
+        return roles;
+    }
+
+    public UserViewModel setRoles(List<RoleDTO> roles) {
+        this.roles = roles;
+        return this;
     }
 }
