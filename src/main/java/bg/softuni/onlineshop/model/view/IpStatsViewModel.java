@@ -10,6 +10,12 @@ public class IpStatsViewModel {
     public IpStatsViewModel() {
     }
 
+    public IpStatsViewModel(LocalDateTime localDateTime, String ipAddress, Long id) {
+        this.localDateTime = localDateTime;
+        this.ipAddress = ipAddress;
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

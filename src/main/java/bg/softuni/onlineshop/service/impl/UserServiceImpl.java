@@ -208,16 +208,22 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserViewModel getUserViewModel(UserEntity e) {
-        return new UserViewModel()
-                .setId(e.getId())
-                .setFirstName(e.getFirstName())
-                .setMiddleName(e.getMiddleName())
-                .setLastName(e.getLastName())
-                .setEmail(e.getEmail())
-                .setActive(e.isActive())
-                .setOrders(e.getOrders().stream()
-                        .map(this::getOrderViewModel).toList())
-                .setRoles(getRoleDTOList(e));
+        return new UserViewModel(e.getId(),
+                e.getFirstName(),
+                e.getMiddleName(),e.getLastName(),
+                e.getEmail(), e.isActive(),
+                e.getOrders().stream()
+                .map(this::getOrderViewModel).toList(),
+                getRoleDTOList(e));
+//                .setId(e.getId())
+//                .setFirstName(e.getFirstName())
+//                .setMiddleName(e.getMiddleName())
+//                .setLastName(e.getLastName())
+//                .setEmail(e.getEmail())
+//                .setActive(e.isActive())
+//                .setOrders(e.getOrders().stream()
+//                        .map(this::getOrderViewModel).toList())
+//                .setRoles(getRoleDTOList(e));
     }
 
     private List<RoleDTO> getRoleDTOList(UserEntity e) {

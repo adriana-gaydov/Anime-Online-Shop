@@ -21,6 +21,21 @@ public class UserViewModel {
 
     private List<RoleDTO> roles;
 
+    public UserViewModel() {
+    }
+
+    public UserViewModel(Long id, String firstName, String middleName, String lastName,
+                         String email, boolean isActive, List<OrderViewModel> orders, List<RoleDTO> roles) {
+        this.id = id;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.email = email;
+        this.isActive = isActive;
+        this.orders = orders;
+        this.roles = roles;
+    }
+
     public String getFirstName() {
         return firstName;
     }

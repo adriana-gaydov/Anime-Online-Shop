@@ -25,7 +25,8 @@ public class IpStatsRestController {
     @Transactional
     public ResponseEntity<List<IpStatsViewModel>> getStatistic() {
         List<IpStatsViewModel> ipStatsViewModels = this.ipStatsService.getStatistic();
-        return new ResponseEntity<>(ipStatsViewModels, HttpStatus.OK);
+        return ResponseEntity
+                .ok(ipStatsViewModels);
     }
 
 }

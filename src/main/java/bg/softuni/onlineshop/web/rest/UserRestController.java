@@ -41,7 +41,7 @@ public class UserRestController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({UserNotFoundException.class})
-    public @ResponseBody ApiErrorDTO handleRESTErrors(ProductNotFoundException e) {
+    public @ResponseBody ApiErrorDTO handleRESTErrors(UserNotFoundException e) {
         return new ApiErrorDTO(e.getId(),
                 "User was not found!");
     }
