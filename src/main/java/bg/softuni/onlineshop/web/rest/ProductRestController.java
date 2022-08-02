@@ -20,7 +20,7 @@ public class ProductRestController {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
+    @GetMapping()
     public ResponseEntity<List<ProductViewModel>> getAllProducts() {
 
         return ResponseEntity.ok(this.productService.getAllProducts());

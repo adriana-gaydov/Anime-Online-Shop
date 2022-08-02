@@ -39,51 +39,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         this.cartItemRepository = cartItemRepository;
     }
 
-    /**
-     * If product is in the map just increment quantity by 1.
-     * If product is not in the map with, add it with quantity 1
-     *
-     * @param product
-     */
     @Override
     public void addProduct(CartItem product) {
         this.shoppingCart.addProduct(product);
     }
 
-    /**
-     * If product is in the map with quantity > 1, just decrement quantity by 1.
-     * If product is in the map with quantity 1, remove it from map
-     *
-     * @param product
-     */
     @Override
     public void removeProduct(CartItem product) {
         this.shoppingCart.removeProduct(product);
     }
 
-//    /**
-//     * @return unmodifiable copy of the map
-//     */
-//    @Override
-//    public ShoppingCart getCart() {
-//        return Collections.unmodifiableMap(this.shoppingCart);
-//    }
-
-    /**
-     * Checkout will rollback if there is not enough of some product in stock
-     *
-     * @throws NotEnoughProductsInStockException
-     */
     @Override
     public void checkout() throws NotEnoughProductsInStockException {
-//        ProductEntity product;
-//        for (Map.Entry<ProductEntity, Integer> entry : products.entrySet()) {
-//            // Refresh quantity for every product before checking
-//            product = productRepository.findById(entry.getKey().getId()).get();
-//            if (product.getQuantity() < entry.getValue())
-//                throw new NotEnoughProductsInStockException(product);
-//            entry.getKey().setQuantity(product.getQuantity() - entry.getValue());
-//        }
 
         Set<CartItem> items = this.shoppingCart.getItems();
 
@@ -137,13 +104,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void clearBag() {
         this.shoppingCart.clear();
     }
-//    @Override
-//    public BigDecimal getTotal() {
-//        return products.entrySet().stream()
-//                .map(entry -> entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())))
-//                .reduce(BigDecimal::add)
-//                .orElse(BigDecimal.ZERO);
-//    }
 
     public boolean isEmpty() {
         return this.shoppingCart.getItems().isEmpty();

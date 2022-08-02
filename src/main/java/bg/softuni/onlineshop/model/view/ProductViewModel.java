@@ -16,6 +16,15 @@ public class ProductViewModel {
     public ProductViewModel() {
     }
 
+    public ProductViewModel(Long id, String name, BigDecimal price, String description, Long quantity, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.quantity = quantity;
+        this.imageUrl = imageUrl;
+    }
+
     public String getName() {
         return name;
     }
