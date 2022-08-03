@@ -24,7 +24,7 @@ public interface ProductService {
 
     boolean isProductExists(String name);
 
-    void addProduct(ProductAddDTO productModel, String imageUrl);
+    ProductEntity addProduct(ProductAddDTO productModel, String imageUrl);
 
     ProductEntity updateProduct(ProductEntity product, ProductEditDTO productEditModel);
 

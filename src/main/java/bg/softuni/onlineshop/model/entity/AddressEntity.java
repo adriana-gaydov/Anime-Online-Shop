@@ -24,6 +24,13 @@ public class AddressEntity extends BaseEntity {
 
     public AddressEntity() {}
 
+    public AddressEntity(CountryEnum country, String city, String zipCode, String street) {
+        this.country = country;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.street = street;
+    }
+
     public CountryEnum getCountry() {
         return country;
     }

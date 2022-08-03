@@ -35,6 +35,15 @@ public class ProductEditDTO {
     public ProductEditDTO() {
     }
 
+    public ProductEditDTO(String name, BigDecimal price, String description, CategoryEnum category, Long quantity, String imageUrl) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.category = category;
+        this.quantity = quantity;
+        this.imageUrl = imageUrl;
+    }
+
     public String getName() {
         return name;
     }

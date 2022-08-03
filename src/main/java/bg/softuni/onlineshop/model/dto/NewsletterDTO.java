@@ -13,6 +13,10 @@ public class NewsletterDTO {
     public NewsletterDTO() {
     }
 
+    public NewsletterDTO(String email) {
+        this.email = email;
+    }
+
     public String getEmail() {
         return email;
     }

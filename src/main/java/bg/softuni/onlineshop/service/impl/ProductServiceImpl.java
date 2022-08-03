@@ -83,7 +83,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProduct(ProductAddDTO productModel, String imageUrl) {
+    public ProductEntity addProduct(ProductAddDTO productModel, String imageUrl) {
 
         ProductEntity product = ProductMapper.INSTANCE.dtoToProduct(productModel);
 
@@ -91,7 +91,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(this.categoryService.findByCategory(productModel.getCategory()));
         product.setLastUpdate(LocalDateTime.now());
 
-        this.productRepository.save(product);
+        return this.productRepository.save(product);
     }
 
     @Override

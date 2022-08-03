@@ -36,6 +36,14 @@ public class ProductAddDTO {
     public ProductAddDTO() {
     }
 
+    public ProductAddDTO(String name, BigDecimal price, String description, CategoryEnum category, Long quantity) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.category = category;
+        this.quantity = quantity;
+    }
+
     public String getName() {
         return name;
     }

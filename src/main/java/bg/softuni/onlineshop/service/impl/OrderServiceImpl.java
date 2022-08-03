@@ -59,19 +59,7 @@ public class OrderServiceImpl implements OrderService {
 
         order.setDateCreated(LocalDate.now());
 
-        List<CartItemEntity> cartItems = this.shoppingCartService.getShoppingCart().getItems()
-                .stream().map(e -> {
-                            ProductEntity product = this.productService.findById(e.getId()).get();
-                            Long qty = e.getQty();
-
-                            product.setQuantity(product.getQuantity() - qty);
-                            productService.save(product);
-
-                            return new CartItemEntity()
-                                    .setQuantity(qty)
-                                    .setProduct(product);
-                        }
-                ).toList();
+        List<CartItemEntity> cartItems = getCartItemEntities();
 
         this.shoppingCartService.saveAll(cartItems);
         order.setItems(cartItems);
@@ -80,6 +68,20 @@ public class OrderServiceImpl implements OrderService {
         this.shoppingCartService.clearBag();
         this.orderRepository.save(order);
         return order;
+    }
+
+    private List<CartItemEntity> getCartItemEntities() {
+        return this.shoppingCartService.getShoppingCart().getItems()
+                .stream().map(e -> {
+                            ProductEntity product = this.productService.findById(e.getId()).get();
+                            Long qty = e.getQty();
+                            product.setQuantity(product.getQuantity() - qty);
+                            productService.save(product);
+                            return new CartItemEntity()
+                                    .setQuantity(qty)
+                                    .setProduct(product);
+                        }
+                ).toList();
     }
 
     @Override

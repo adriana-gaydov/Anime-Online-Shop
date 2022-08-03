@@ -36,7 +36,7 @@ public class NewsletterController {
         }
 
 
-        if(!this.newsletterService.addEmail(newsletterDTO)) {
+        if(this.newsletterService.addEmail(newsletterDTO) == null) {
             redirectAttributes.addFlashAttribute("emailExists", true);
             redirectAttributes.addFlashAttribute("newsletterDTO", newsletterDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.newsletterDTO", bindingResult);

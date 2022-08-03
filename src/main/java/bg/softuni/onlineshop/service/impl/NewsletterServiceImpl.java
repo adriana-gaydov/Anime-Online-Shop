@@ -18,16 +18,14 @@ public class NewsletterServiceImpl implements NewsletterService {
     }
 
     @Override
-    public boolean addEmail(NewsletterDTO newsletterDTO) {
+    public NewsletterEntity addEmail(NewsletterDTO newsletterDTO) {
 
         if (this.newsletterRepository.findByEmail(newsletterDTO.getEmail()).isPresent()) {
-            return false;
+            return null;
         }
 
-        this.newsletterRepository.save(new NewsletterEntity()
+        return this.newsletterRepository.save(new NewsletterEntity()
                 .setEmail(newsletterDTO.getEmail()));
-
-        return true;
     }
 
     @Override

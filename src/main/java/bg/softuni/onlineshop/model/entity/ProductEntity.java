@@ -41,6 +41,20 @@ public class ProductEntity {
     public ProductEntity() {
     }
 
+    public ProductEntity(Long id, String name, BigDecimal price, String description, CategoryEntity category, LocalDateTime lastUpdate, Long quantity, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.category = category;
+        this.lastUpdate = lastUpdate;
+        this.quantity = quantity;
+        this.imageUrl = imageUrl;
+    }
+
+    public ProductEntity(long l, String test, BigDecimal bigDecimal, CategoryEntity setCategory, LocalDateTime of, String s) {
+    }
+
     public String getName() {
         return name;
     }
