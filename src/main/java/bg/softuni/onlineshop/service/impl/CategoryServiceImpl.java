@@ -19,10 +19,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void initCategories() {
+    public List<CategoryEntity> initCategories() {
 
         if (this.categoryRepository.count() != 0) {
-            return;
+            return null;
         }
 
         List<CategoryEntity> categories = Arrays.stream(CategoryEnum.values())
@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
                         .setDescription(e + " description..."))
                 .toList();
 
-        this.categoryRepository.saveAllAndFlush(categories);
+        return this.categoryRepository.saveAll(categories);
     }
 
     @Override
