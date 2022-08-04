@@ -34,7 +34,7 @@ fetch("http://localhost:8080/api/orders", requestOptions)
             order.products.forEach(p => {
 
                     let productHtml = document.createElement('a')
-                    productHtml.innerHTML=p.prodName+" "
+                    productHtml.innerHTML=p.prodName+" x" + p.quantity + " "
                     productHtml.href='/products/'+p.id
 
                     productsSpan.appendChild(productHtml)
@@ -51,9 +51,9 @@ fetch("http://localhost:8080/api/orders", requestOptions)
         row.appendChild(orderId)
         products.appendChild(productsSpan)
         row.appendChild(products)
-        row.appendChild(customerEmail)
         row.appendChild(totalPrice)
         row.appendChild(orderDate)
+        row.appendChild(customerEmail)
         row.appendChild(fullAddress)
 
         ordersContainer.appendChild(row)

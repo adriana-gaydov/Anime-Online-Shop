@@ -7,7 +7,7 @@ import java.util.List;
 public class OrderAdminView {
 
     private Long orderId;
-    private List<ProductIdNameView> products;
+    private List<ProductIdNameQtyView> products;
     private String customerEmail;
     private BigDecimal totalPrice;
     private LocalDate orderDate;
@@ -61,11 +61,11 @@ public class OrderAdminView {
         return this;
     }
 
-    public List<ProductIdNameView> getProducts() {
+    public List<ProductIdNameQtyView> getProducts() {
         return products;
     }
 
-    public OrderAdminView setProducts(List<ProductIdNameView> products) {
+    public OrderAdminView setProducts(List<ProductIdNameQtyView> products) {
         this.products = products;
         return this;
     }

@@ -6,14 +6,13 @@ import bg.softuni.onlineshop.model.cart.ShoppingCart;
 import bg.softuni.onlineshop.model.dto.AddressDTO;
 import bg.softuni.onlineshop.model.entity.*;
 import bg.softuni.onlineshop.model.view.OrderAdminView;
-import bg.softuni.onlineshop.model.view.ProductIdNameView;
+import bg.softuni.onlineshop.model.view.ProductIdNameQtyView;
 import bg.softuni.onlineshop.repository.OrderRepository;
 import bg.softuni.onlineshop.service.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -110,8 +109,8 @@ public class OrderServiceImpl implements OrderService {
                         .setOrderDate(e.getDateCreated())
                         .setCustomerEmail(e.getCustomer().getEmail())
                         .setFullAddress(e.getAddress().toString())
-                        .setTotalPrice(getTotalPrice(e))
-                        .setProducts(e.getItems().stream().map(this::getProductIdNameView)
+                        .setTotalPrice(e.getTotalPrice())
+                        .setProducts(e.getItems().stream().map(this::getProductIdNameQtyView)
                                 .toList())).toList();
 
     }
@@ -128,23 +127,11 @@ public class OrderServiceImpl implements OrderService {
         return this.orderRepository.findById(id).isPresent();
     }
 
-    private BigDecimal getTotalPrice(OrderEntity e) {
-        return totalPrice(e.getItems().stream().map(CartItemEntity::getProduct).map(ProductEntity::getPrice).toList());
-    }
-
-    private ProductIdNameView getProductIdNameView(CartItemEntity e2) {
-        return new ProductIdNameView()
+    private ProductIdNameQtyView getProductIdNameQtyView(CartItemEntity e2) {
+        return new ProductIdNameQtyView()
                 .setId(e2.getProduct().getId())
-                .setProdName(e2.getProduct().getName());
+                .setProdName(e2.getProduct().getName())
+                .setQuantity(e2.getQuantity());
     }
 
-    public BigDecimal totalPrice(List<BigDecimal> allPrices) {
-
-        BigDecimal total = new BigDecimal("0");
-
-        for (BigDecimal p : allPrices) {
-            total = total.add(p);
-        }
-        return total;
-    }
 }

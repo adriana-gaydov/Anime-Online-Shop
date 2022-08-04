@@ -31,12 +31,17 @@ public class ShoppingCart {
 
     public BigDecimal totalPrice() {
 
-        List<BigDecimal> allPrices = this.items.stream().map(e -> e.getPrice()).toList();
+        Set<CartItem> cartItems = this.items;
         BigDecimal total = new BigDecimal("0");
 
-        for (BigDecimal p : allPrices) {
-            total = total.add(p);
+        for (CartItem cartItem : cartItems) {
+
+            Long qty = cartItem.getQty();
+            BigDecimal price = cartItem.getPrice();
+
+            total = total.add(price.multiply(new BigDecimal(qty)));
         }
+        
         return total;
     }
 

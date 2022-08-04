@@ -67,7 +67,7 @@
             <td th:text="*{orderId}">id</td>
 
             <th:block th:each="p : *{products}">
-                <td><a th:text="${p.prodName}" th:href="@{/products/{id}(id = ${p.id})}"></a></td>
+                <td><a th:text="|${p.prodName} x${p.quantity}|" th:href="@{/products/{id}(id = ${p.id})}"></a></td>
             </th:block>
 
             <td th:text="*{totalPrice}">total price</td>

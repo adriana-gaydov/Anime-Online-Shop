@@ -7,21 +7,14 @@ import bg.softuni.onlineshop.model.dto.UserEditDTO;
 import bg.softuni.onlineshop.model.dto.UserRegisterDTO;
 import bg.softuni.onlineshop.model.entity.CartItemEntity;
 import bg.softuni.onlineshop.model.entity.OrderEntity;
-import bg.softuni.onlineshop.model.entity.RoleEntity;
 import bg.softuni.onlineshop.model.entity.UserEntity;
 import bg.softuni.onlineshop.model.enums.RoleEnum;
 import bg.softuni.onlineshop.model.view.OrderViewModel;
-import bg.softuni.onlineshop.model.view.ProductIdNameView;
+import bg.softuni.onlineshop.model.view.ProductIdNameQtyView;
 import bg.softuni.onlineshop.model.view.UserViewModel;
 import bg.softuni.onlineshop.repository.UserRepository;
 import bg.softuni.onlineshop.service.RoleService;
 import bg.softuni.onlineshop.service.UserService;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -210,8 +203,10 @@ public class UserServiceImpl implements UserService {
     private UserViewModel getUserViewModel(UserEntity e) {
         return new UserViewModel(e.getId(),
                 e.getFirstName(),
-                e.getMiddleName(),e.getLastName(),
-                e.getEmail(), e.isActive(),
+                e.getMiddleName(),
+                e.getLastName(),
+                e.getEmail(),
+                e.isActive(),
                 e.getOrders().stream()
                 .map(this::getOrderViewModel).toList(),
                 getRoleDTOList(e));
@@ -243,9 +238,10 @@ public class UserServiceImpl implements UserService {
                         map(this::getProductIdNameView).toList());
     }
 
-    private ProductIdNameView getProductIdNameView(CartItemEntity i) {
-        return new ProductIdNameView()
+    private ProductIdNameQtyView getProductIdNameView(CartItemEntity i) {
+        return new ProductIdNameQtyView()
                 .setId(i.getProduct().getId())
-                .setProdName(i.getProduct().getName());
+                .setProdName(i.getProduct().getName())
+                .setQuantity(i.getQuantity());
     }
 }

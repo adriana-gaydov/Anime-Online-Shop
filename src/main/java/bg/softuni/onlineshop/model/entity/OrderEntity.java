@@ -1,9 +1,12 @@
 package bg.softuni.onlineshop.model.entity;
 
+import bg.softuni.onlineshop.model.cart.CartItem;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -62,12 +65,15 @@ public class OrderEntity extends BaseEntity {
 
     public BigDecimal getTotalPrice() {
 
-        List<BigDecimal> allPrices = this.items.stream().map(CartItemEntity::getProduct).map(ProductEntity::getPrice).toList();
-        BigDecimal total = BigDecimal.ZERO;
+        List<CartItemEntity> cartItemEntities = this.items.stream().toList();
 
-        for (BigDecimal price : allPrices) {
+        BigDecimal total = new BigDecimal("0");
+        for (CartItemEntity cartItem : cartItemEntities) {
 
-            total = total.add(price);
+            long qty = cartItem.getQuantity();
+            BigDecimal price = cartItem.getProduct().getPrice();
+
+            total = total.add(price.multiply(new BigDecimal(qty)));
         }
 
         return total;
